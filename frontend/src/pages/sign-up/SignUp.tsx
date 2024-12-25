@@ -27,7 +27,15 @@ const SignUp = () => {
 
     return (
         <div className="flex flex-row py-2 justify-between lg:w-5/6 w-full h-screen overflow-hidden">
-            <div className="lg:w-2/6 w-full m-auto">
+            <div className="lg:w-2/6 w-full m-auto h-full">
+                <div className="flex flex-row gap-2 my-5">
+                    <img
+                        src='/icon.svg'
+                        alt='icon'
+                    />
+                    <span className="text-xl font-semibold">HD</span>
+                </div>
+
                 <Card>
                     <CardHeader>
                         <CardTitle>Sign Up</CardTitle>
@@ -57,15 +65,31 @@ const SignUp = () => {
                         </div>
                     </CardContent>
                     <CardFooter className="flex justify-center items-center">
-                        <Button 
-                            className="w-full bg-blue-600" 
-                            type="submit" 
-                            onClick={handleSubmit} 
+                        <Button
+                            className="w-full bg-blue-600"
+                            type="submit"
+                            onClick={handleSubmit}
                             disabled={loading}
-                        >{loading ? <span className="animate-spin"></span> : 'Sign In'}</Button>
+                        >{loading ? <span className="animate-spin"></span> : 'Sign Up'}</Button>
                     </CardFooter>
                 </Card>
+
+                <div className="relative flex items-center w-[95%] mx-auto mb-2">
+                    <div className="flex-grow border-t border-gray-600 border-2"></div>
+                    <span className="flex-shrink mx-4 text-gray-600 font-medium">OR</span>
+                    <div className="flex-grow border-t border-gray-600 border-2"></div>
+                </div>
+
+                <div>
+                    google auth
+                </div>
+
+                <div className="flex flex-row justify-center gap-2 mt-6">
+                    <span className="text-slate-400">Already have an account?</span>
+                    <a className="underline text-blue-700 hover:text-blue-500" href='/sign-in'>Sign In</a>
+                </div>
             </div>
+
             <div className="hidden lg:block">
                 <img
                     src='/container.png'

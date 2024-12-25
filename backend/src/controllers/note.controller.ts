@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import Note from "../models/note.model"
 
-const createNote = async (req: Request, res: Response): Promise<void> => {
+const createNote = async (req: Request, res: Response) => {
     try {
         const { title, content } = req.body
         const userId = req.user._id
@@ -68,7 +68,6 @@ const getAllNotes = async (req: Request, res: Response) => {
 
         if (!userNotes) {
             res.status(404).json("This user does not have any notes")
-            return
         }
 
         res.status(200).json(userNotes)

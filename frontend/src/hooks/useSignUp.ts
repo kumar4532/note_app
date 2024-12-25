@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useAuthContext } from '../context/AuthContext'
+import toast from 'react-hot-toast';
 
 function useSignup() {
     const [loading, setLoading] = useState(false);
@@ -20,16 +21,19 @@ function useSignup() {
 
             const data = await res.json();
 
-            console.log(data);
-
+            if (!res.ok) {
+                throw new Error(data);
+                toast.success("User signed up")
+            }
 
             if (data) {
                 localStorage.setItem("user", JSON.stringify(data));
                 setAuthUser(data);
             }
 
-        } catch (error) {
+        } catch (error: any) {
             console.log("Error is from catch");
+            toast.error(error.message)
         } finally {
             setLoading(false);
         }
@@ -43,7 +47,7 @@ export default useSignup;
 function handleInputErrors({ name, email, password }: { name: string, email: string, password: string }) {
 
     if (!name || !email || !password) {
-        console.log("Please fill all the feilds")
+        toast.error("Please enter all the fields")
         return false;
     }
 
