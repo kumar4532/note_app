@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv'
 
 import authRoutes from './routers/auth.routes'
+import noteRoutes from './routers/note.routes'
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/note", noteRoutes);
 
 connectDB()
     .then(() => {
