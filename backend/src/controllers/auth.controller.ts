@@ -11,6 +11,7 @@ const signup = async (req: Request, res: Response): Promise<void> => {
 
         if (alreadyExists) {
             res.status(400).json("User already exists")
+            return;
         }
 
         const salt = await bcrypt.genSalt(10);
