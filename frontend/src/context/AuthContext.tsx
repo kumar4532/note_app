@@ -1,7 +1,7 @@
 import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useState, useEffect } from "react";
 
 type AuthUserType = {
-    id: string;
+    _id: string;
     name: string;
     email: string;
     password: string;

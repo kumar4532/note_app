@@ -1,8 +1,12 @@
+import { useState } from "react"
+import NoteDialog from "./NoteDialog"
 import { Button } from "./ui/button"
 
 const CreateNoteBtn = () => {
-    const handleNote = () => {
+    const [isOpen, setIsOpen] = useState(false)
 
+    const handleNote = () => {
+        setIsOpen(true)
     }
 
     return (
@@ -13,6 +17,7 @@ const CreateNoteBtn = () => {
             >
                 Create New Note
             </Button>
+            <NoteDialog open={isOpen} onOpenChange={setIsOpen} />
         </div>
     )
 }
