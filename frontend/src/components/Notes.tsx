@@ -14,7 +14,10 @@ const Notes = () => {
     useEffect(() => {
         try {
             const getNotes = async () => {
-                const res = await fetch("/api/note/")
+                const res = await fetch("/api/note/", {
+                    method: 'GET',
+                    credentials: 'include'
+                })
                 const data = await res.json();
 
                 if (!res.ok) {
@@ -36,7 +39,8 @@ const Notes = () => {
     const handleDelete = async (noteId: string) => {
         try {
             const res = await fetch(`/api/note/${noteId}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                credentials: 'include'
             })
 
             if (!res.ok) throw new Error("Failed to delete note")
