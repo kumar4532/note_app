@@ -2,6 +2,9 @@ import { Request, Response } from "express"
 import User from "../models/user.model";
 import generateTokenAndSetCookies from "../utils/generateTokens";
 import bcrypt from 'bcryptjs'
+import { OAuth2Client } from 'google-auth-library';
+
+const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 const signup = async (req: Request, res: Response) => {
     try {
@@ -38,7 +41,7 @@ const signin = async (req: Request, res: Response) => {
 
         if (!userFound) {
             res.status(404).json("Invalid Email Id");
-            return 
+            return
         }
 
         const isPasswordCorrect = await bcrypt.compare(
@@ -48,7 +51,7 @@ const signin = async (req: Request, res: Response) => {
 
         if (!isPasswordCorrect) {
             res.status(404).json("Password is Incorrect");
-            return 
+            return
         }
 
         generateTokenAndSetCookies(userFound._id, res);
@@ -69,8 +72,51 @@ const signout = (req: Request, res: Response) => {
     }
 }
 
+const googleAuth = async (req: Request, res: Response) => {
+    try {
+        const { credential } = req.body;
+
+        const ticket = await googleClient.verifyIdToken({
+            idToken: credential,
+            audience: process.env.GOOGLE_CLIENT_ID
+        });
+
+        const payload = ticket.getPayload();
+        if (!payload) {
+            res.status(400).json("Invalid Google token");
+            return;
+        }
+
+        const { email, name, sub: googleId } = payload;
+
+        let user = await User.findOne({ email });
+
+        if (user) {
+            if (user.authType === 'local') {
+                res.status(400).json("Email already registered. Please sign in with password");
+                return;
+            }
+        } else {
+            user = await User.create({
+                name,
+                email,
+                googleId,
+                authType: 'google'
+            });
+        }
+
+        generateTokenAndSetCookies(user._id, res);
+        res.status(200).json(user);
+
+    } catch (error) {
+        console.log("Error in Google authentication:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
 export {
     signup,
     signin,
-    signout
+    signout,
+    googleAuth
 }

@@ -12,7 +12,18 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
+        required: function(this: { authType: string }) {
+            return this.authType === 'local';
+        }
+    },
+    authType: {
+        type: String,
+        enum: ['local', 'google'],
+        default: 'local'
+    },
+    googleId: {
+        type: String,
+        sparse: true
     },
 }, { timestamps: true })
 

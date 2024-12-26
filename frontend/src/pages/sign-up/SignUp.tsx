@@ -1,3 +1,4 @@
+import GoogleAuthBtn from "@/components/GoogleAuthBtn"
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -11,6 +12,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import useSignup from "@/hooks/useSignUp"
 import { useState } from "react"
+import { Link } from "react-router-dom"
 
 const SignUp = () => {
     const { loading, signup } = useSignup();
@@ -74,19 +76,19 @@ const SignUp = () => {
                     </CardFooter>
                 </Card>
 
-                <div className="relative flex items-center w-[95%] mx-auto mb-2">
+                <div className="relative flex items-center w-[95%] mx-auto mb-4">
                     <div className="flex-grow border-t border-gray-600 border-2"></div>
                     <span className="flex-shrink mx-4 text-gray-600 font-medium">OR</span>
                     <div className="flex-grow border-t border-gray-600 border-2"></div>
                 </div>
 
                 <div>
-                    google auth
+                    <GoogleAuthBtn />
                 </div>
 
                 <div className="flex flex-row justify-center gap-2 mt-6">
                     <span className="text-slate-400">Already have an account?</span>
-                    <a className="underline text-blue-700 hover:text-blue-500" href='/sign-in'>Sign In</a>
+                    <Link to='/sign-in' className="underline text-blue-700 hover:text-blue-500">Sign In</Link>
                 </div>
             </div>
 
