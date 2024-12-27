@@ -14,7 +14,8 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({
+
+app.use("*", cors({
     origin: 'https://note-app-client-psi.vercel.app',
     methods: ["GET", "POST", "DELETE"],
     credentials: true
@@ -22,6 +23,10 @@ app.use(cors({
 
 app.use("/api/auth", authRoutes);
 app.use("/api/note", noteRoutes);
+
+app.get("/api/test-cors", (req, res) => {
+    res.json({ message: "CORS is working!" });
+});
 
 connectDB()
     .then(() => {
