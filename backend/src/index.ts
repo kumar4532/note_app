@@ -13,7 +13,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors({
-    origin: 'https://note-app-client-psi.vercel.app',
+    origin: "https://note-app-client-alpha.vercel.app",
     allowedHeaders: ['Content-Type', 'Authorization'],
     methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
     credentials: true,
