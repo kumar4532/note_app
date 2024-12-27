@@ -9,14 +9,15 @@ const generateTokenAndSetCookies = (userId: Types.ObjectId, res: Response) => {
         throw new Error("JWT_SECRET is not defined in environment variables");
     }
 
-    const token = jwt.sign({userId}, secret, {
+    const token = jwt.sign({ userId }, secret, {
         expiresIn: "15d"
     })
 
     res.cookie("jwt", token, {
         maxAge: 15 * 24 * 60 * 60 * 1000,
         httpOnly: true,
-        sameSite: "strict"
+        sameSite: "strict",
+        secure: process.env.NODE_ENV === "production"
     })
 }
 

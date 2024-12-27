@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
 
 connectDB()
     .then(() => {
-        app.listen(PORT, () =>{
+        app.listen(PORT, () => {
             console.log(`Server is running at port : ${PORT}`);
         })
     })
