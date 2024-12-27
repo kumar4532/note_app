@@ -12,8 +12,6 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
-
 app.use(cors({
     origin: ["https://note-app-client-alpha.vercel.app", "http://localhost:5173"],
     allowedHeaders: ['Content-Type', 'Authorization'],
@@ -21,8 +19,8 @@ app.use(cors({
     credentials: true
 }));
 
+app.use(express.json());
 app.use(cookieParser());
-
 
 app.use("/api/auth", authRoutes);
 app.use("/api/note", noteRoutes);

@@ -19,9 +19,9 @@ declare global {
     }
 }
 
-const protectRoute = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+const protectRoute = async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		console.log(req.cookies);
+		console.log("this is cookie",req.cookies);
 		
 		const token = req.cookies.jwt;
 
