@@ -12,20 +12,22 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(cors({
+    origin: 'https://note-app-client-psi.vercel.app',
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
+    credentials: true,
+    exposedHeaders: ['set-cookie']
+}));
+
 app.use(express.json());
 app.use(cookieParser());
-
-app.use("*", cors({
-    origin: 'https://note-app-client-psi.vercel.app',
-    methods: ["GET", "POST", "DELETE"],
-    credentials: true
-}))
 
 app.use("/api/auth", authRoutes);
 app.use("/api/note", noteRoutes);
 
-app.get("/api/test-cors", (req, res) => {
-    res.json({ message: "CORS is working!" });
+app.get("/", (req, res) => {
+    res.json({ message: "This is Dumb!!!!!" });
 });
 
 connectDB()
