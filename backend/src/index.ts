@@ -20,8 +20,7 @@ app.use(cors({
     origin: ["https://note-app-client-alpha.vercel.app", "http://localhost:5173"],
     allowedHeaders: ['Content-Type', 'Authorization'],
     methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
-    credentials: true,
-    exposedHeaders: ['set-cookie']
+    credentials: true
 }));
 
 app.use("/api/auth", authRoutes);
