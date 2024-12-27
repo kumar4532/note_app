@@ -27,7 +27,7 @@ const GoogleAuthBtn = () => {
 
             const idToken = user.getAuthResponse().id_token;
 
-            const res = await fetch("/api/auth/google", {
+            const res = await fetch(`${import.meta.env.VITE_REACT_APP_BASEURI}/api/auth/google`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

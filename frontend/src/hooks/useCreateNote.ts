@@ -8,10 +8,11 @@ function useCreateNote() {
         setLoading(true);
 
         try {
-            const res = await fetch("/api/note/", {
+            const res = await fetch(`${import.meta.env.VITE_REACT_APP_BASEURI}/api/note/`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ id, title, content }),
+                credentials: 'include'
             });
 
             const data = await res.json();

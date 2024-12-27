@@ -13,10 +13,11 @@ function useSignin() {
         setLoading(true);
 
         try {
-            const res = await fetch("/api/auth/sign-in", {
+            const res = await fetch(`${import.meta.env.VITE_REACT_APP_BASEURI}/api/auth/sign-in`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password }),
+                credentials: 'include'
             });
 
             const data = await res.json();

@@ -14,8 +14,7 @@ const Notes = () => {
     useEffect(() => {
         try {
             const getNotes = async () => {
-                const res = await fetch("/api/note/", {
-                    method: 'GET',
+                const res = await fetch(`${import.meta.env.VITE_REACT_APP_BASEURI}/api/note/`, {
                     credentials: 'include'
                 })
                 const data = await res.json();
@@ -37,8 +36,9 @@ const Notes = () => {
     }, [notes])
 
     const handleDelete = async (noteId: string) => {
+        
         try {
-            const res = await fetch(`/api/note/${noteId}`, {
+            const res = await fetch(`${import.meta.env.VITE_REACT_APP_BASEURI}/api/note/${noteId}`, {
                 method: 'DELETE',
                 credentials: 'include'
             })

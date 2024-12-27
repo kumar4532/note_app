@@ -12,8 +12,9 @@ function useSignOut() {
         setLoading(true);
 
         try {
-            const res = await fetch("/api/auth/sign-out", {
+            const res = await fetch(`${import.meta.env.VITE_REACT_APP_BASEURI}/api/auth/sign-out`, {
                 method: "POST",
+                credentials: 'include'
             });
 
             const data = await res.json();

@@ -11,7 +11,7 @@ function useSignup() {
         setSignLoading(true);
 
         try {
-            const res = await fetch("/api/auth/sign-up", {
+            const res = await fetch(`${import.meta.env.VITE_REACT_APP_BASEURI}/api/auth/sign-up`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ name, email, password }),

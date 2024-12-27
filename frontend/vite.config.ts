@@ -3,13 +3,6 @@ import react from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
 
 export default defineConfig({
-  server: {
-    proxy: {
-      "/api": {
-        target: 'https://note-app-api-gamma.vercel.app'
-      }
-    }
-  },
   plugins: [react()],
   resolve: {
     alias: {
