@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-    origin: "https://note-app-client-alpha.vercel.app",
+    origin: ["https://note-app-client-alpha.vercel.app", "http://localhost:5173"],
     allowedHeaders: ['Content-Type', 'Authorization'],
     methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
     credentials: true,
