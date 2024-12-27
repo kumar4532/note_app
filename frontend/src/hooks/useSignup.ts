@@ -1,45 +1,41 @@
 import { useState } from 'react'
-import { useAuthContext } from '../context/AuthContext'
 import toast from 'react-hot-toast';
 
 function useSignup() {
-    const [loading, setLoading] = useState(false);
-    const { setAuthUser } = useAuthContext();
+    const [signLoading, setSignLoading] = useState(false);
 
     const signup = async ({ name, email, password }: { name: string, email: string, password: string }) => {
         const success = handleInputErrors({ name, email, password });
         if (!success) return;
 
-        setLoading(true);
+        setSignLoading(true);
 
         try {
             const res = await fetch("/api/auth/sign-up", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ name, email, password }),
+                credentials: 'include'
             });
 
             const data = await res.json();
-
+            console.log(data);
+            
+            
             if (!res.ok) {
                 throw new Error(data);
-                toast.success("User signed up")
             }
-
-            if (data) {
-                localStorage.setItem("user", JSON.stringify(data));
-                setAuthUser(data);
-            }
-
+            
+            return data
         } catch (error: any) {
             console.log("Error is from catch");
             toast.error(error.message)
         } finally {
-            setLoading(false);
+            setSignLoading(false);
         }
     };
 
-    return { loading, signup };
+    return { signLoading, signup };
 };
 
 export default useSignup;

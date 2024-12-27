@@ -61,7 +61,7 @@ const GoogleAuthBtn = () => {
     return (
         <Button
             variant="outline"
-            className="w-full flex items-center justify-center gap-2 p-2 border rounded-lg hover:bg-gray-50"
+            className="w-[90%] mx-auto flex items-center justify-center gap-2 p-2 border rounded-lg hover:bg-gray-50"
             onClick={handleGoogleLogin}
             disabled={googleLoading}
         >
