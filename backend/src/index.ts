@@ -14,8 +14,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors({
     origin: ["https://note-app-client-alpha.vercel.app", "http://localhost:5173"],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
+    methods: ['GET', 'POST', 'DELETE'],
     credentials: true
 }));
 
